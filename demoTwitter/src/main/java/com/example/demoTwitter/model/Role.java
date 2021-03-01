@@ -13,6 +13,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 public class Role {
+
+    // this here allows the Id to be auto generated
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "role_id")
