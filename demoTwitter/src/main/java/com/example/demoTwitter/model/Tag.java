@@ -1,6 +1,5 @@
 package com.example.demoTwitter.model;
 
-package com.tts.TechTalentTwitter.model;
 
 import java.util.List;
 

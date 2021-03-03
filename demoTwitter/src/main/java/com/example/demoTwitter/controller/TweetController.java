@@ -20,7 +20,7 @@ public class TweetController {
     @Autowired
     private UserService userService;
 
-//    @Autowired
+    @Autowired
     private TweetService tweetService;
 
     @GetMapping(value = {"/tweets","/"})
