@@ -6,6 +6,7 @@
 </head>
 <body>
 <div class="container">
+    <div th:replace="fragments/navBar"></div>
     <h2>Sign up</h2>
     <form th:action="@{/signup}" th:object="${user}" method="post" autocomplete="off" >
         <div class="form-group">
@@ -32,6 +33,7 @@
             <button class="btn btn-md btn-success btn-block" name="Submit" value="Submit" type="Submit" th:text="Submit"></button>
         </div>
     </form>
+
 </div>
 </body>
 </html>
