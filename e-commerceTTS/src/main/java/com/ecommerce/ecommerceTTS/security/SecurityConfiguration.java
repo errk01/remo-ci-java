@@ -13,7 +13,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-
     @Autowired
     private UserService userService;
 
@@ -21,18 +20,32 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth)throws Exception{
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder);
     }
+
     @Override
-    protected void configure(HttpSecurity http) throws Exception{
-        http
-                .authorizeRequests()
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers("/console/**").permitAll()
+                .antMatchers("/").permitAll()
+                .antMatchers("/about").permitAll()
+                .antMatchers("/main").permitAll()
+                .antMatchers("/product").permitAll()
+                .antMatchers("/signin").permitAll()
+                .antMatchers("/custom.js").permitAll()
+                .antMatchers("/custom.css").permitAll()
                 .antMatchers("/cart").authenticated()
-                .and().formLogin().loginPage("/signin")
+                .antMatchers().hasAuthority("USER").anyRequest().authenticated()
+                .and().csrf().disable().formLogin()
+                .loginPage("/signin").failureUrl("/signin?error=true")
+                .defaultSuccessUrl("/")
                 .loginProcessingUrl("/login")
                 .and().logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/signout"))
-                .logoutSuccessUrl("/");
+                .logoutSuccessUrl("/")
+                .and().exceptionHandling()
+        ;
+        http.headers().frameOptions().disable();
     }
 }
