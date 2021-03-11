@@ -36,16 +36,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/custom.js").permitAll()
                 .antMatchers("/custom.css").permitAll()
                 .antMatchers("/cart").authenticated()
-                .antMatchers().hasAuthority("USER").anyRequest().authenticated()
-                .and().csrf().disable().formLogin()
+                .antMatchers().hasAuthority("USER").anyRequest()
+                .authenticated().and().csrf().disable().formLogin()
                 .loginPage("/signin").failureUrl("/signin?error=true")
                 .defaultSuccessUrl("/")
-                .loginProcessingUrl("/login")
+                .loginProcessingUrl("/signin")
                 .and().logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/signout"))
                 .logoutSuccessUrl("/")
-                .and().exceptionHandling()
-        ;
+                .and().exceptionHandling();
         http.headers().frameOptions().disable();
     }
 }
