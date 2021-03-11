@@ -36,6 +36,7 @@ public class User implements UserDetails {
     private boolean enabled = true;
     @Transient
     private Collection<GrantedAuthority> authorities = null;
+
     // this here allows the Id to be auto generated
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -53,9 +54,9 @@ public class User implements UserDetails {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+//    private Set<Role> roles;
 
 
     @ElementCollection
