@@ -17,7 +17,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "product_id")
     private Long id;
-    private Integer quantity;
+    private int quantity;
     private float price;
 
     private String brand;
