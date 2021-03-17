@@ -62,6 +62,7 @@ public class TweetController {
         }
         return "newTweet";
     }
+
     @GetMapping(value = "/tweets/{tag}")
     public String getTweetsByTag(@PathVariable(value="tag") String tag, Model model) {
         List<TweetDisplay> tweets = tweetService.findAllWithTag(tag);
